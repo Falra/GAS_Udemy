@@ -26,3 +26,14 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 {
     Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
+
+void ACharacterBase::AcquireAbility(TSubclassOf<UGameplayAbility> AbilityToAcquire)
+{
+    if (!AbilitySystemComponent) return;
+
+    if (HasAuthority() && AbilityToAcquire)
+    {
+        AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(AbilityToAcquire));
+    }
+    AbilitySystemComponent->InitAbilityActorInfo(this, this);
+}

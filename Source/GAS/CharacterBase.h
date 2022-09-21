@@ -26,5 +26,7 @@ public:
     class UAbilitySystemComponent* AbilitySystemComponent;
 
     virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent; };
-    
+
+    UFUNCTION(BlueprintCallable, Category = AbilitySystem)
+    void AcquireAbility(TSubclassOf<class UGameplayAbility> AbilityToAcquire);
 };
