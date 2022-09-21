@@ -13,4 +13,9 @@ UCLASS()
 class GAS_API UAttributeSetBase : public UAttributeSet
 {
     GENERATED_BODY()
+public:
+    UAttributeSetBase();
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attributes)
+    FGameplayAttributeData Health;
 };

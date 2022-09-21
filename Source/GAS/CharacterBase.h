@@ -25,6 +25,9 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AbilitySystem)
     class UAbilitySystemComponent* AbilitySystemComponent;
 
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AbilitySystem)
+    class UAttributeSetBase* AttributeSet;
+    
     virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent; };
 
     UFUNCTION(BlueprintCallable, Category = AbilitySystem)

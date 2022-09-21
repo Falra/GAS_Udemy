@@ -4,12 +4,14 @@
 #include "CharacterBase.h"
 
 #include "AbilitySystemComponent.h"
+#include "AttributeSetBase.h"
 
 ACharacterBase::ACharacterBase()
 {
     PrimaryActorTick.bCanEverTick = true;
 
     AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
+    AttributeSet = CreateDefaultSubobject<UAttributeSetBase>("AttributeSet");
 }
 
 void ACharacterBase::BeginPlay()
