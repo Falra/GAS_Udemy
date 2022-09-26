@@ -17,6 +17,9 @@ ACharacterBase::ACharacterBase()
 void ACharacterBase::BeginPlay()
 {
     Super::BeginPlay();
+
+    check(AttributeSet);
+    AttributeSet->OnHealthChanged.AddDynamic(this, &ACharacterBase::OnHealthChanged);
 }
 
 void ACharacterBase::Tick(float DeltaTime)
@@ -38,4 +41,9 @@ void ACharacterBase::AcquireAbility(TSubclassOf<UGameplayAbility> AbilityToAcqui
         AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(AbilityToAcquire));
     }
     AbilitySystemComponent->InitAbilityActorInfo(this, this);
+}
+
+void ACharacterBase::OnHealthChanged(float Health, float MaxHealth)
+{
+    BlueprintOnHealthChanged(Health, MaxHealth);
 }
