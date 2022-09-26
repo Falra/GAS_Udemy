@@ -47,8 +47,9 @@ void ACharacterBase::OnHealthChanged(float Health, float MaxHealth)
 {
     BlueprintOnHealthChanged(Health, MaxHealth);
 
-    if (Health <= 0.0f)
+    if (Health <= 0.0f && !bIsDead)
     {
+        bIsDead = true;
         BlueprintDie();
     }
 }

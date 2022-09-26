@@ -41,4 +41,7 @@ public:
 
     UFUNCTION(BlueprintImplementableEvent, Category = AbilitySystem, meta = (DisplayName="Die"))
     void BlueprintDie();
+
+private:
+    bool bIsDead = false;
 };
