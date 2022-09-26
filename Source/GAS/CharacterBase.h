@@ -38,4 +38,7 @@ public:
 
     UFUNCTION(BlueprintImplementableEvent, Category = AbilitySystem, meta = (DisplayName="OnHealthChanged"))
     void BlueprintOnHealthChanged(float Health, float MaxHealth);
+
+    UFUNCTION(BlueprintImplementableEvent, Category = AbilitySystem, meta = (DisplayName="Die"))
+    void BlueprintDie();
 };
