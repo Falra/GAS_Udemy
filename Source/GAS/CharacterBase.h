@@ -42,7 +42,9 @@ public:
     UFUNCTION(BlueprintImplementableEvent, Category = AbilitySystem, meta = (DisplayName="Die"))
     void BlueprintDie();
 
-private:
+    UFUNCTION(BlueprintCallable, Category = AbilitySystem)
+    bool IsOtherHostile(ACharacterBase* Other);
+protected:
     bool bIsDead = false;
     uint8 TeamId;
     void AutoDetermineTeamIDByControllerType();

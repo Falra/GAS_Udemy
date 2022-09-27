@@ -57,6 +57,11 @@ void ACharacterBase::OnHealthChanged(float Health, float MaxHealth)
     }
 }
 
+bool ACharacterBase::IsOtherHostile(ACharacterBase* Other)
+{
+    return TeamId != Other->TeamId;
+}
+
 void ACharacterBase::AutoDetermineTeamIDByControllerType()
 {
     if (GetController() && GetController()->IsPlayerController())
