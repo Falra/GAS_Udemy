@@ -12,6 +12,7 @@ ACharacterBase::ACharacterBase()
 
     AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
     AttributeSet = CreateDefaultSubobject<UAttributeSetBase>("AttributeSet");
+    TeamId = 255;
 }
 
 void ACharacterBase::BeginPlay()
@@ -20,6 +21,8 @@ void ACharacterBase::BeginPlay()
 
     check(AttributeSet);
     AttributeSet->OnHealthChanged.AddDynamic(this, &ACharacterBase::OnHealthChanged);
+
+    AutoDetermineTeamIDByControllerType();
 }
 
 void ACharacterBase::Tick(float DeltaTime)
@@ -51,5 +54,13 @@ void ACharacterBase::OnHealthChanged(float Health, float MaxHealth)
     {
         bIsDead = true;
         BlueprintDie();
+    }
+}
+
+void ACharacterBase::AutoDetermineTeamIDByControllerType()
+{
+    if (GetController() && GetController()->IsPlayerController())
+    {
+        TeamId = 0;
     }
 }

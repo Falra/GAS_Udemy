@@ -44,4 +44,6 @@ public:
 
 private:
     bool bIsDead = false;
+    uint8 TeamId;
+    void AutoDetermineTeamIDByControllerType();
 };
