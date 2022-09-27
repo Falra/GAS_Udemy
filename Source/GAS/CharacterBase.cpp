@@ -4,7 +4,9 @@
 #include "CharacterBase.h"
 
 #include "AbilitySystemComponent.h"
+#include "AIController.h"
 #include "AttributeSetBase.h"
+#include "BrainComponent.h"
 
 ACharacterBase::ACharacterBase()
 {
@@ -53,6 +55,7 @@ void ACharacterBase::OnHealthChanged(float Health, float MaxHealth)
     if (Health <= 0.0f && !bIsDead)
     {
         bIsDead = true;
+        Dead();
         BlueprintDie();
     }
 }
@@ -67,5 +70,20 @@ void ACharacterBase::AutoDetermineTeamIDByControllerType()
     if (GetController() && GetController()->IsPlayerController())
     {
         TeamId = 0;
+    }
+}
+
+void ACharacterBase::Dead()
+{
+    APlayerController* PC = Cast<APlayerController>(GetController());
+    if (PC)
+    {
+        PC->DisableInput(PC);
+    }
+
+    const AAIController* AIC = Cast<AAIController>(GetController());
+    if (AIC)
+    {
+        AIC->GetBrainComponent()->StopLogic("Dead");
     }
 }

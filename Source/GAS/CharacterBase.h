@@ -48,4 +48,5 @@ protected:
     bool bIsDead = false;
     uint8 TeamId;
     void AutoDetermineTeamIDByControllerType();
+    void Dead();
 };
