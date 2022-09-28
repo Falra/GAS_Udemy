@@ -33,11 +33,23 @@ public:
     UFUNCTION(BlueprintCallable, Category = AbilitySystem)
     void AcquireAbility(TSubclassOf<class UGameplayAbility> AbilityToAcquire);
 
-    UFUNCTION(BlueprintCallable, Category = AbilitySystem)
+    UFUNCTION()
     void OnHealthChanged(float Health, float MaxHealth);
 
     UFUNCTION(BlueprintImplementableEvent, Category = AbilitySystem, meta = (DisplayName="OnHealthChanged"))
     void BlueprintOnHealthChanged(float Health, float MaxHealth);
+
+    UFUNCTION()
+    void OnManaChanged(float Mana, float MaxMana);
+
+    UFUNCTION(BlueprintImplementableEvent, Category = AbilitySystem, meta = (DisplayName="OnManaChanged"))
+    void BlueprintOnManaChanged(float Mana, float MaxMana);
+
+    UFUNCTION()
+    void OnStrengthChanged(float Strength, float MaxStrength);
+
+    UFUNCTION(BlueprintImplementableEvent, Category = AbilitySystem, meta = (DisplayName="OnStrengthChanged"))
+    void BlueprintOnStrengthChanged(float Strength, float MaxStrength);
 
     UFUNCTION(BlueprintImplementableEvent, Category = AbilitySystem, meta = (DisplayName="Die"))
     void BlueprintDie();

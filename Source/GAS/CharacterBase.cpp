@@ -23,6 +23,8 @@ void ACharacterBase::BeginPlay()
 
     check(AttributeSet);
     AttributeSet->OnHealthChanged.AddDynamic(this, &ACharacterBase::OnHealthChanged);
+    AttributeSet->OnManaChanged.AddDynamic(this, &ACharacterBase::OnManaChanged);
+    AttributeSet->OnStrengthChanged.AddDynamic(this, &ACharacterBase::OnStrengthChanged);
 
     AutoDetermineTeamIDByControllerType();
 }
@@ -58,6 +60,16 @@ void ACharacterBase::OnHealthChanged(float Health, float MaxHealth)
         Dead();
         BlueprintDie();
     }
+}
+
+void ACharacterBase::OnManaChanged(float Mana, float MaxMana)
+{
+    BlueprintOnManaChanged(Mana, MaxMana);
+}
+
+void ACharacterBase::OnStrengthChanged(float Strength, float MaxStrength)
+{
+    BlueprintOnStrengthChanged(Strength, MaxStrength);
 }
 
 bool ACharacterBase::IsOtherHostile(ACharacterBase* Other)
