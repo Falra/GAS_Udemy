@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/Character.h"
 #include "CharacterBase.generated.h"
 
@@ -56,6 +57,16 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = AbilitySystem)
     bool IsOtherHostile(ACharacterBase* Other);
+
+    UFUNCTION(BlueprintCallable, Category = AbilitySystem)
+    void AddGameplayTag(const FGameplayTag& TagToAdd);
+    
+    UFUNCTION(BlueprintCallable, Category = AbilitySystem)
+    void RemoveGameplayTag(const FGameplayTag& TagToRemove);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AbilitySystem)
+    FGameplayTag FullHealthTag;
+    
 protected:
     bool bIsDead = false;
     uint8 TeamId;
