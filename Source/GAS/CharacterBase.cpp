@@ -53,6 +53,15 @@ void ACharacterBase::AcquireAbility(TSubclassOf<UGameplayAbility> AbilityToAcqui
 
 void ACharacterBase::OnHealthChanged(float Health, float MaxHealth)
 {
+    if (Health == MaxHealth)
+    {
+        AddGameplayTag(FullHealthTag);
+    }
+    else
+    {
+        RemoveGameplayTag(FullHealthTag);
+    }
+    
     BlueprintOnHealthChanged(Health, MaxHealth);
 
     if (Health <= 0.0f && !bIsDead)
