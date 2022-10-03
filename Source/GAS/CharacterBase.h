@@ -66,10 +66,14 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AbilitySystem)
     FGameplayTag FullHealthTag;
-    
+
+    UFUNCTION(BlueprintCallable, Category = AbilitySystem)
+    void HitStun(float StunTime);
 protected:
     bool bIsDead = false;
     uint8 TeamId;
     void AutoDetermineTeamIDByControllerType();
     void Dead();
+    void DisableInputControl();
+    void EnableInputControl();
 };
