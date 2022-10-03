@@ -13,5 +13,8 @@ UCLASS()
 class GAS_API UGameplayAbilityBase : public UGameplayAbility
 {
     GENERATED_BODY()
-
+public:
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AbilitySystem")
+    UMaterialInstance* UIMaterial;
+    
 };
