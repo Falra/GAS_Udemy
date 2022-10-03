@@ -136,6 +136,8 @@ void ACharacterBase::DisableInputControl()
 
 void ACharacterBase::EnableInputControl()
 {
+    if (bIsDead) return;
+    
     APlayerController* PC = Cast<APlayerController>(GetController());
     if (PC)
     {
