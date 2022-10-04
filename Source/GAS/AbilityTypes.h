@@ -6,6 +6,7 @@
 UENUM(BlueprintType)
 enum class EAbilityCostType : uint8
 {
+    None,
     Health,
     Mana,
     Strength
@@ -34,7 +35,7 @@ struct FGameplayAbilityInfo
     FGameplayAbilityInfo()
     : CooldownDuration(0.0f),
           Cost(0.0f),
-          CostType(EAbilityCostType::Mana),
+          CostType(EAbilityCostType::None),
           UIMaterial(nullptr),
           AbilityClass(nullptr)
     {
