@@ -82,4 +82,5 @@ protected:
     void Dead();
     void DisableInputControl();
     void EnableInputControl();
+    void AddAbilityToUI(TSubclassOf<class UGameplayAbilityBase> AbilityClass);
 };

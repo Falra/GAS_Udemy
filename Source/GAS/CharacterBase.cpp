@@ -7,6 +7,8 @@
 #include "AIController.h"
 #include "AttributeSetBase.h"
 #include "BrainComponent.h"
+#include "GameplayAbilityBase.h"
+#include "PlayerControllerBase.h"
 
 ACharacterBase::ACharacterBase()
 {
@@ -56,6 +58,11 @@ void ACharacterBase::AcquireAbilities()
     for (auto AbilityToAcquire : AbilitiesToAcquire)
     {
         AcquireAbility(AbilityToAcquire);
+        if (AbilityToAcquire->IsChildOf(UGameplayAbilityBase::StaticClass()))
+        {
+            TSubclassOf<UGameplayAbilityBase> AbilityBase = *AbilityToAcquire;
+            AddAbilityToUI(AbilityBase);
+        }
     }
 }
 
@@ -157,4 +164,14 @@ void ACharacterBase::EnableInputControl()
     {
         AIC->GetBrainComponent()->RestartLogic();
     }
+}
+
+void ACharacterBase::AddAbilityToUI(TSubclassOf<UGameplayAbilityBase> AbilityClass)
+{
+    APlayerControllerBase* PC = GetController<APlayerControllerBase>();
+    if (!PC) return;
+    const UGameplayAbilityBase* AbilityInstance = AbilityClass.Get()->GetDefaultObject<UGameplayAbilityBase>();
+    if (!AbilityInstance) return;
+    FGameplayAbilityInfo AbilityInfo = AbilityInstance->GetAbilityInfo();
+    PC->AddAbilityToUI(AbilityInfo);
 }
