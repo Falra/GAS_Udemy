@@ -34,6 +34,12 @@ public:
     UFUNCTION(BlueprintCallable, Category = AbilitySystem)
     void AcquireAbility(TSubclassOf<class UGameplayAbility> AbilityToAcquire);
 
+    UPROPERTY(EditAnywhere, Category = AbilitySystem)
+    TArray<TSubclassOf<UGameplayAbility>> AbilitiesToAcquire;
+        
+    UFUNCTION(BlueprintCallable, Category = AbilitySystem)
+    void AcquireAbilities();
+    
     UFUNCTION()
     void OnHealthChanged(float Health, float MaxHealth);
 

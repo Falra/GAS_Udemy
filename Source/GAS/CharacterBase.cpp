@@ -51,6 +51,14 @@ void ACharacterBase::AcquireAbility(TSubclassOf<UGameplayAbility> AbilityToAcqui
     AbilitySystemComponent->InitAbilityActorInfo(this, this);
 }
 
+void ACharacterBase::AcquireAbilities()
+{
+    for (auto AbilityToAcquire : AbilitiesToAcquire)
+    {
+        AcquireAbility(AbilityToAcquire);
+    }
+}
+
 void ACharacterBase::OnHealthChanged(float Health, float MaxHealth)
 {
     if (Health == MaxHealth)
