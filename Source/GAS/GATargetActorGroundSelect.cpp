@@ -3,6 +3,7 @@
 
 #include "GATargetActorGroundSelect.h"
 
+#include "DrawDebugHelpers.h"
 #include "Abilities/GameplayAbility.h"
 
 void AGATargetActorGroundSelect::StartTargeting(UGameplayAbility* Ability)
@@ -49,6 +50,15 @@ void AGATargetActorGroundSelect::ConfirmTargetingAndContinue()
     {
         TargetDataReadyDelegate.Broadcast(FGameplayAbilityTargetDataHandle());
     }
+}
+
+void AGATargetActorGroundSelect::Tick(float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+
+    FVector ViewLocation;
+    GetPlayerLookingPoint(ViewLocation);
+    DrawDebugSphere(GetWorld(), ViewLocation, Radius, 32, FColor::Red, true, -1, 0, 5.0f);
 }
 
 bool AGATargetActorGroundSelect::GetPlayerLookingPoint(FVector& OutViewPoint)

@@ -17,7 +17,8 @@ class GAS_API AGATargetActorGroundSelect : public AGameplayAbilityTargetActor
 public:
     virtual void StartTargeting(UGameplayAbility* Ability) override;
     virtual void ConfirmTargetingAndContinue() override;
-
+    virtual void Tick(float DeltaSeconds) override;
+    
     UFUNCTION(BlueprintCallable, Category = AbilitySystem)
     bool GetPlayerLookingPoint(FVector& OutViewPoint);
 
