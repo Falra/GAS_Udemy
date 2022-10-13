@@ -20,4 +20,7 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = AbilitySystem)
     bool GetPlayerLookingPoint(FVector& OutViewPoint);
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AbilitySystem)
+    float Radius = 100.0f;
 };

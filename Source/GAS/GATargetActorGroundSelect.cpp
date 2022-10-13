@@ -16,6 +16,29 @@ void AGATargetActorGroundSelect::ConfirmTargetingAndContinue()
 {
     FVector ViewLocation;
     GetPlayerLookingPoint(ViewLocation);
+
+    TArray<FOverlapResult> Overlapped;
+    TArray<TWeakObjectPtr<AActor>> OverlappedActors;
+    bool TraceComplex = false;
+
+    FCollisionQueryParams QueryParams;
+    QueryParams.bTraceComplex = TraceComplex;
+    QueryParams.bReturnPhysicalMaterial = false;
+    QueryParams.AddIgnoredActor(MasterPC->GetPawn());
+    bool TryOverlap = GetWorld()->OverlapMultiByObjectType(Overlapped, ViewLocation, FQuat::Identity,
+        FCollisionObjectQueryParams(ECC_Pawn), FCollisionShape::MakeSphere(Radius), QueryParams);
+
+    if (TryOverlap)
+    {
+        for (auto OverlapResult : Overlapped)
+        {
+            auto PawnOverlap = Cast<APawn>(OverlapResult.GetActor());
+            if (PawnOverlap && !OverlappedActors.Contains(PawnOverlap))
+            {
+                OverlappedActors.Add(PawnOverlap);
+            }
+        }
+    }
 }
 
 bool AGATargetActorGroundSelect::GetPlayerLookingPoint(FVector& OutViewPoint)
@@ -33,7 +56,9 @@ bool AGATargetActorGroundSelect::GetPlayerLookingPoint(FVector& OutViewPoint)
         QueryParams.AddIgnoredActor(MyPawn);
     }
 
-    bool TryTrace = GetWorld()->LineTraceSingleByChannel(HitResult, ViewPoint, ViewPoint + ViewRotation.Vector() * 10000.0f, ECC_Visibility, QueryParams);
+    bool TryTrace = GetWorld()->LineTraceSingleByChannel(HitResult, ViewPoint, ViewPoint + ViewRotation.Vector() * 10000.0f,
+        ECC_Visibility, QueryParams);
+
     if (TryTrace)
     {
         OutViewPoint = HitResult.ImpactPoint;
