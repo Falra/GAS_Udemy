@@ -19,13 +19,13 @@ void AGATargetActorGroundSelect::ConfirmTargetingAndContinue()
 
     TArray<FOverlapResult> Overlapped;
     TArray<TWeakObjectPtr<AActor>> OverlappedActors;
-    bool TraceComplex = false;
+    const bool TraceComplex = false;
 
     FCollisionQueryParams QueryParams;
     QueryParams.bTraceComplex = TraceComplex;
     QueryParams.bReturnPhysicalMaterial = false;
     QueryParams.AddIgnoredActor(MasterPC->GetPawn());
-    bool TryOverlap = GetWorld()->OverlapMultiByObjectType(Overlapped, ViewLocation, FQuat::Identity,
+    const bool TryOverlap = GetWorld()->OverlapMultiByObjectType(Overlapped, ViewLocation, FQuat::Identity,
         FCollisionObjectQueryParams(ECC_Pawn), FCollisionShape::MakeSphere(Radius), QueryParams);
 
     if (TryOverlap)
@@ -38,6 +38,16 @@ void AGATargetActorGroundSelect::ConfirmTargetingAndContinue()
                 OverlappedActors.Add(PawnOverlap);
             }
         }
+    }
+
+    if (OverlappedActors.Num() > 0)
+    {
+        const FGameplayAbilityTargetDataHandle TargetData = StartLocation.MakeTargetDataHandleFromActors(OverlappedActors);
+        TargetDataReadyDelegate.Broadcast(TargetData);
+    }
+    else
+    {
+        TargetDataReadyDelegate.Broadcast(FGameplayAbilityTargetDataHandle());
     }
 }
 
