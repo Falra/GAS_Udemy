@@ -15,6 +15,8 @@ class GAS_API AGATargetActorGroundSelect : public AGameplayAbilityTargetActor
     GENERATED_BODY()
 
 public:
+    AGATargetActorGroundSelect();
+    
     virtual void StartTargeting(UGameplayAbility* Ability) override;
     virtual void ConfirmTargetingAndContinue() override;
     virtual void Tick(float DeltaSeconds) override;
@@ -22,6 +24,6 @@ public:
     UFUNCTION(BlueprintCallable, Category = AbilitySystem)
     bool GetPlayerLookingPoint(FVector& OutViewPoint);
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AbilitySystem)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AbilitySystem, meta = (ExposeOnSpawn = true))
     float Radius = 100.0f;
 };
