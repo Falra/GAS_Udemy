@@ -26,4 +26,10 @@ public:
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AbilitySystem, meta = (ExposeOnSpawn = true))
     float Radius = 100.0f;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AbilitySystem)
+    UDecalComponent* Decal;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = AbilitySystem)
+    USceneComponent* RootComp;
 };
