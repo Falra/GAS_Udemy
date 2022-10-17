@@ -64,7 +64,7 @@ void AGATargetActorGroundSelect::ConfirmTargetingAndContinue()
     }
     else
     {
-        TargetDataReadyDelegate.Broadcast(FGameplayAbilityTargetDataHandle());
+        TargetDataReadyDelegate.Broadcast(FGameplayAbilityTargetDataHandle(CenterLocation));
     }
 }
 
