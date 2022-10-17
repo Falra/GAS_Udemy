@@ -4,7 +4,6 @@
 #include "GATargetActorGroundSelect.h"
 #include "Abilities/GameplayAbility.h"
 #include "Components/DecalComponent.h"
-#include "Components/DecalComponent.h"
 
 AGATargetActorGroundSelect::AGATargetActorGroundSelect()
 {
@@ -53,9 +52,14 @@ void AGATargetActorGroundSelect::ConfirmTargetingAndContinue()
         }
     }
 
+    FGameplayAbilityTargetData_LocationInfo* CenterLocation = new FGameplayAbilityTargetData_LocationInfo();
+    CenterLocation->TargetLocation.LiteralTransform = Decal->GetComponentTransform();
+    CenterLocation->TargetLocation.LocationType = EGameplayAbilityTargetingLocationType::LiteralTransform;
+    
     if (OverlappedActors.Num() > 0)
     {
-        const FGameplayAbilityTargetDataHandle TargetData = StartLocation.MakeTargetDataHandleFromActors(OverlappedActors);
+        FGameplayAbilityTargetDataHandle TargetData = StartLocation.MakeTargetDataHandleFromActors(OverlappedActors);
+        TargetData.Add(CenterLocation);
         TargetDataReadyDelegate.Broadcast(TargetData);
     }
     else
